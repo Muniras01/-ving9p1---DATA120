@@ -1,8 +1,8 @@
 import datetime
 #Oppgave d
 class Avtale:
-    def __init__(self, title, sted, starttidspunkt, varighet, kategori):
-         self.tittel= title
+    def __init__(self, tittel, sted, starttidspunkt, varighet, kategori):
+         self.tittel= tittel
          self.sted= sted
          self.starttidspunkt = starttidspunkt
          self.varighet= varighet
@@ -13,7 +13,7 @@ class Avtale:
 #oppgave f
 
 def avtale():
-    title= input("Skriv inn tittelen:")
+    tittel= input("Skriv inn tittelen:")
     sted= input("Skriv inn et sted:")
     starttidspunkt= datetime.datetime.fromisoformat(input("Skriv inn starttidspunktet:"))
     varighet= int(input("Skriv inn varigheten i minutter:"))
