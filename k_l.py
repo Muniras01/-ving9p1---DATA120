@@ -1,6 +1,6 @@
 # Laget egen fil - Anniken
 
-# Oppgave k
+# Oppgave k, a
 from main import Avtale
 
 def søk_etter_streng(ei_liste_avtaler, en_streng):
@@ -11,6 +11,7 @@ def søk_etter_streng(ei_liste_avtaler, en_streng):
     return liste_ut
 
 
+# Oppgave l
 
 
 
