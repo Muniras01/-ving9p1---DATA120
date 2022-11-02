@@ -41,7 +41,8 @@ list_opp_avtaler(dummy_liste_med_møter)
 def lagre_liste_m_avtaler(liste):
     with open ("avtale.txt","w",encoding="UTF-8") as fila:
         for linje in liste:
-             fila.write(f"{linje}\n")
+             fila.write(f"{linje.title}\n;{linje.sted}\n;{linje.starttidspunkt}\n;{linje.varighet}\n;{linje.kategori}\n")
+
 #oppgave i
 def les_avtale_fil(filnavn):
     avtale_liste= list()
