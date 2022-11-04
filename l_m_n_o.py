@@ -5,7 +5,31 @@ Created on Wed Nov  2 21:33:53 2022
 
 @author: muniraseedow
 """
+from main import *
+from k_l import *
 
+# def endreAvtale(): 
+
+def redigere(avtalen):
+     n =  int(input("1. tittel \n 2.sted \n 3.dato \n 4.tid \n 5.varighet \n Enter whihch one you want to change: "))
+     for i in range(n):
+         if n == 1: 
+             dummy_liste_med_møter[i].tittle=input("New tititel: " )
+         elif n == 2:
+             dummy_liste_med_møter[i].sted=input("New place: ")
+         elif n == 3: 
+             dummy_liste_med_møter[i].date=input("New dato: ")
+         elif n == 4:
+             dummy_liste_med_møter[i].tid=input("New tid: ")
+         elif n ==5:
+             dummy_liste_med_møter[i].varighet=input("New varighet: ")  
+
+     
+        
+             
+     
+
+      
 def meny(): 
     ei_liste_avtaler = [ ]
     if (len(ei_liste_avtaler)== 0): 
@@ -29,27 +53,13 @@ def meny():
             lagre_liste_m_avtaler(ei_liste_avtaler)
         elif valg == 5: 
             list_opp_avtaler(ei_liste_avtaler)
-            y = int(input("which wanna delete?:"))
+            y = int(input("which one do you wanna delete?:"))
             if input("Are you sure [y/n]")=="y":
                 del ei_liste_avtaler[y]
+            
         elif valg == 6: 
-            while True:  
-                n = int(input(f"Tittel: {ei_liste_avtaler.tittel}",
-                              f"Sted: {ei_liste_avtaler.sted}",
-                              f"Dato: {ei_liste_avtaler.dato}",
-                              f"Tid: {ei_liste_avtaler.tid}",
-                              f"Varighet:{ei_liste_avtaler.varighet}, \n Which one do you want to change?: "))
-                for i in n:
-                    if n == 0: 
-                        ei_liste_avtaler[i].tittle=input("New tititele")
-                    elif n == 1:
-                        ei_liste_avtaler[i].tittle=input("New place")
-                    elif n == 2: 
-                        ei_liste_avtaler[i].tittle=input("New dato")
-                    elif n ==3:
-                        ei_liste_avtaler[i].tittle=input("New tid")
-                    elif n == 4:
-                        ei_liste_avtaler[i].tittle=input("New varighet")          
+            redigere(ei_liste_avtaler)
+            
         elif valg == 7: 
              print("avslutt") 
              break

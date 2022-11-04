@@ -18,7 +18,7 @@ def avtale():
     starttidspunkt= datetime.datetime.fromisoformat(input("Skriv inn starttidspunktet:"))
     varighet= int(input("Skriv inn varigheten i minutter:"))
     kategori= input("Skriv inn kategorien:")
-    return Avtale(title, sted, starttidspunkt, varighet, kategori)
+    return Avtale(tittel, sted, starttidspunkt, varighet, kategori)
 #min_avtale = avtale()
 #print(min_avtale)
 
@@ -41,7 +41,9 @@ list_opp_avtaler(dummy_liste_med_møter)
 def lagre_liste_m_avtaler(liste):
     with open ("avtale.txt","w",encoding="UTF-8") as fila:
         for linje in liste:
-             fila.write(f"{linje}\n")
+            fila.write(f"{linje.title}\n;{linje.sted}\n;{linje.starttidspunkt}\n;{linje.varighet}\n;{linje.kategori}")
+            
+            
 #oppgave i
 def les_avtale_fil(filnavn):
     avtale_liste= list()
@@ -56,3 +58,13 @@ def dato_i_avtale (avtale_liste,dato):
         if dato == avtale.starttidspunkt.dato():
             dato_avtale.append(avtale)
         return dato_avtale
+
+
+def søk_etter_streng(ei_liste_avtaler, en_streng):
+    liste_ut = []
+    for object in ei_liste_avtaler:
+        if en_streng.lower() in object.tittel.lower():
+            liste_ut.append(object)
+    return liste_ut
+
+
