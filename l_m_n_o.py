@@ -24,11 +24,7 @@ def redigere(avtalen):
          elif n ==5:
              dummy_liste_med_møter[i].varighet=input("New varighet: ")  
 
-     
-        
-             
-     
-
+    
       
 def meny(): 
     ei_liste_avtaler = [ ]
@@ -63,5 +59,5 @@ def meny():
         elif valg == 7: 
              print("avslutt") 
              break
-   
-meny()
+if __name__=="__main__":
+    meny()   
