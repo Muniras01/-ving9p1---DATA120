@@ -1,18 +1,21 @@
 import datetime
 #Oppgave d
 class Avtale:
-    def __init__(self, tittel, sted, starttidspunkt, varighet, kategori):
+    def __init__(self, tittel, sted, starttidspunkt, varighet, kategorier):
          self.tittel= tittel
          self.sted= sted
          self.starttidspunkt = starttidspunkt
          self.varighet= varighet
-         self.kategori= kategori
+         self.kategorier= []
 #oppgave e
     def __str__(self):
-        return f"Møte: tittel:{self.tittel} ,sted:{self.sted},tidspunkt:{self.starttidspunkt}, varighet:{self.varighet}min,kategori:{self.kategori})"
+        return f"Møte: tittel:{self.tittel} ,sted:{self.sted},tidspunkt:{self.starttidspunkt}, varighet:{self.varighet}min,kategori:{self.kategori}"
 #oppgave f
 
-def avtale():
+# a1 = Avtale(1,2,3,4)
+# a1.kategorier.append()
+#oppgave f
+def ny_avtale():
     tittel= input("Skriv inn tittelen:")
     sted= input("Skriv inn et sted:")
     starttidspunkt= datetime.datetime.fromisoformat(input("Skriv inn starttidspunktet:"))
@@ -39,27 +42,34 @@ list_opp_avtaler(dummy_liste_med_møter)
 
 # oppgave h
 def lagre_liste_m_avtaler(liste):
-    with open ("avtale.txt","w",encoding="UTF-8") as fila:
+    with open ("Avtale.txt","w",encoding="UTF-8") as fila:
         for linje in liste:
-            fila.write(f"{linje.title}\n;{linje.sted}\n;{linje.starttidspunkt}\n;{linje.varighet}\n;{linje.kategori}")
+            fila.write(f"{linje.tittel};{linje.sted};{linje.starttidspunkt};{linje.varighet};{linje.kategori}")
             
             
 #oppgave i
 def les_avtale_fil(filnavn):
-    avtale_liste= list()
-    with open (filnavn,encoding="UTF-8") as fila:
+    avtale_liste= []
+    with open (filnavn, "r", encoding="UTF-8") as fila:
         for linje in fila:
-            avtale_liste.append(linje)
+            title, sted, starttidspunkt, varighet, kategori = linje.split(";")
+            starttidspunkt = datetime.datetime.fromisoformat(starttidspunkt)
+            #make kategory into kategory object
+            varighet = int(varighet)
+            
+            avtale = Avtale(title, sted, starttidspunkt, varighet, kategori)
+            avtale_liste.append(avtale)
+    return avtale_liste
     
 #oppgave j
 def dato_i_avtale (avtale_liste,dato):
-    dato_avtale= list()
+    dato_avtale= []
     for avtale in avtale_liste:
         if dato == avtale.starttidspunkt.dato():
             dato_avtale.append(avtale)
         return dato_avtale
 
-
+#oppgave k 
 def søk_etter_streng(ei_liste_avtaler, en_streng):
     liste_ut = []
     for object in ei_liste_avtaler:
@@ -68,3 +78,65 @@ def søk_etter_streng(ei_liste_avtaler, en_streng):
     return liste_ut
 
 
+#a function to change certain things -oppgave n
+def redigere(avtalen):
+    n =  int(input("1which deal do ya wanna change yo "))
+    options=["1 Tittel","2 Sted","3 Dato","4 Tid","5 Varighet"]
+    
+    for option in options: 
+        print (option)
+    
+    attribute=input("What attribute do you want to change?")
+    
+    if attribute in options[0]:
+        dummy_liste_med_møter[n].tittle=input("New tititel: " )
+    
+    if attribute in options[1]:
+        dummy_liste_med_møter[n].sted=input("New Sted: " )
+    
+    if attribute in options[2]:
+        dummy_liste_med_møter[n].dato=input("New Dato: " )
+    
+    if attribute in options[3]:
+        dummy_liste_med_møter[n].tid=input("New Tid: " )
+    
+    if attribute in options[4]:
+        dummy_liste_med_møter[n].varighet=input("New Varighet: " )
+#oppgave L       
+def meny(): 
+    ei_liste_avtaler = [ ]
+    if (len(ei_liste_avtaler)== 0): 
+        print("havent done any: ")
+    else: lagre_liste_m_avtaler(ei_liste_avtaler)
+    while True:
+        valg = int(input("1. Skrive inn en ny avtale\n 2. lese inn avtaler fra fil \n 3. Skriv ut alle avtalene\n 4. skriv avtalene til fil \n 5. Delete \n 6. Make changes \n 7.Avslutt  \n Enter your choice: "))
+        if valg == 1: 
+            avtale = ny_avtale()
+            ei_liste_avtaler.append(avtale) 
+        elif valg == 2: 
+            lese_avtale = les_avtale_fil("Avtale.txt")
+            for avtale in lese_avtale: 
+                print(avtale)
+        elif valg == 3: 
+            if not ei_liste_avtaler: 
+                print("tomt liste")
+            else:
+                for avtale in ei_liste_avtaler:
+                    print(avtale)
+                
+        elif valg ==4: 
+            lagre_liste_m_avtaler(ei_liste_avtaler)
+        elif valg == 5: 
+            list_opp_avtaler(ei_liste_avtaler)
+            y = int(input("which one do you wanna delete?:")) #opppgave m
+            if input("Are you sure [y/n]")=="y":
+                del ei_liste_avtaler[y]
+            
+        elif valg == 6: 
+            redigere(les_avtale_fil)
+            
+        elif valg == 7: 
+             print("avslutt") 
+             break
+if __name__=="__main__":
+    meny() 
