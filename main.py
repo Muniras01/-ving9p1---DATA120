@@ -138,5 +138,70 @@ def meny():
         elif valg == 7: 
              print("avslutt") 
              break
+     
+#Del2
+#c
+class Kategori:
+    def __init__(self,en_id,navn,prioritet):
+        self.en_id=en_id
+        self.navn=navn
+        self.prioritet= prioritet
+        return f"Kateogi:en_id:{self.en_id} ,navn:{self.navn},prioritet:{self.prioritet}"
+    
+#d
+    def leser_fra_brukern():
+        en_id=input("id: ")
+        navn= input("Skriv in navn: ")
+        prioritet= input("Skriv inn prioritet: ")
+        return Kategori(en_id,navn,prioritet)
+#g   
+class Sted:
+    def __init__(self,ID,navn_sted,gateadress,postnummer,poststed): 
+        self.ID=ID
+        self.navn_sted=navn_sted
+        self.gateadress=gateadress
+        self.postnummer=postnummer
+        self.poststed=poststed
+        
+    def __str__(self):
+        return f"Sted: ID:{self.ID},navn_sted:{self.navn_sted},gateadress:{self.gateadress},postnummer:{self.postnummer},poststed:{self.poststed}"
+    
+#h
+def nytt_sted():
+    ID= input("ID: ")
+    navn_sted= input("Skriv in navn: ")
+    gateadress= input("Skriv inn gateadress: ")
+    postnummer=int(input("Skriv inn postnummer: "))
+    poststed=input("Skriv inn poststed: ")
+    return Sted(ID,navn_sted,gateadress,postnummer,poststed)
+
+#i
+def lagre_sted(sted):
+    with open("sted.txt","w",encoding="UTF-8") as fil:
+        for linje in sted:
+            fil.write(f"{linje.ID};{linje.navn_sted};{linje.gateadress};{linje.postnummer};{linje.poststed}")
+        
+        
+def les_sted():
+    sted_liste=[]
+    with open("sted.txt","r",encoding="UTF-8") as fila:
+        for linje in fila:
+            ID,navn_sted,address = linje.split(";")
+            sted=Sted(ID, navn_sted, gateadress, postnummer, poststed)
+            sted_liste.append(sted)
+    return sted_liste 
+
+                
+#j
+def skriv_ut_sted(stedet):
+    for sted in stedet:
+        print(sted)
+        
+stedet=list(les_sted())
+skriv_ut_sted(stedet)
+    
+    
+    
+    
 if __name__=="__main__":
     meny() 
