@@ -186,7 +186,7 @@ def les_sted():
     sted_liste=[]
     with open("sted.txt","r",encoding="UTF-8") as fila:
         for linje in fila:
-            ID,navn_sted,address = linje.split(";")
+            ID,navn_sted,gateaddress,postnummer,poststed = linje.split(";")
             sted=Sted(ID, navn_sted, gateadress, postnummer, poststed)
             sted_liste.append(sted)
     return sted_liste 
