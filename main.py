@@ -205,3 +205,63 @@ skriv_ut_sted(stedet)
     
 if __name__=="__main__":
     meny() 
+    
+ #Oppgave k
+    def legger_til_kategori(self, kategori):
+        self.kategori.append(kategori)
+
+#Oppgave l
+def lagre_liste_m_avtaler(liste,filnavn="Avtale.txt"):
+    with open (filnavn,"w",encoding="UTF-8") as fila:
+        for linje in liste:
+            kategori_navn= ""
+            for kategori in linje.kategorier:
+                kategori_navn += str(kategori)
+            fila.write(f"{linje.tittel};{linje.sted};{linje.starttidspunkt};{linje.varighet};{kategori_navn}")
+
+#Oppgvae m
+kategori= list()
+def meny():
+    ei_liste_avtaler = [ ]
+    ei_liste_avtaler.append(Avtale("møte2", "Oslo", "2022-09-15 12:15:00", "60", "politikk"))
+    #if (len(ei_liste_avtaler)== 0):
+     #   print("havent done any: ")
+    #else: lagre_liste_m_avtaler(ei_liste_avtaler)
+    while True:
+        valg = int(input("1. Skrive inn en ny avtale\n 2. lese inn avtaler fra fil \n 3. Skriv ut alle avtalene\n 4. skriv avtalene til fil \n 5. Delete \n 6. Make changes \n 7.Legge til kategorier  \n 8.Legge til steder \n9.Avslutt  \n Enter your choice: "))
+        if valg == 1:
+            avtale = ny_avtale()
+            ei_liste_avtaler.append(avtale)
+        elif valg == 2:
+            lese_avtale = les_avtale_fil("Avtale.txt")
+            for avtale in lese_avtale:
+                print(avtale)
+
+        elif valg == 3:
+            if  len(ei_liste_avtaler) == 0:
+                print("tomt liste")
+            else:
+                for avtale in ei_liste_avtaler:
+                    print(avtale)
+
+        elif valg ==4:
+            ei_liste_avtaler.append(Avtale("møte2", "Oslo", "2022-09-15 12:15:00", "60", ["politikk"]))
+            lagre_liste_m_avtaler(ei_liste_avtaler)
+
+        elif valg == 5:
+            list_opp_avtaler(ei_liste_avtaler)
+            y = int(input("which one do you wanna delete?:"))
+            if input("Are you sure [y/n]")=="y":
+                del ei_liste_avtaler[y]
+        elif valg == 6:
+            redigere(les_avtale_fil)
+
+       elif valg == 7:
+         nykategori()
+
+        elif valg == 8:
+        les_sted ()
+
+        elif valg == 9:
+             print("avslutt")
+             break
