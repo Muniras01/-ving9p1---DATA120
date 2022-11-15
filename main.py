@@ -260,7 +260,7 @@ def meny():
          nykategori()
 
         elif valg == 8:
-        les_sted ()
+        nytt_sted ()
 
         elif valg == 9:
              print("avslutt")
