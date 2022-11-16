@@ -141,20 +141,51 @@ def meny():
      
 #Del2
 #c
+#c
 class Kategori:
-    def __init__(self,en_id,navn,prioritet):
-        self.en_id=en_id
-        self.navn=navn
-        self.prioritet= prioritet
-        return f"Kateogi:en_id:{self.en_id} ,navn:{self.navn},prioritet:{self.prioritet}"
+    def __init__(self,en_id: int, navn: str, prioritet):
+        self.en_id = id
+        self.navn = navn
+        self.prioritet = prioritet
+      
+    def __str__(self): 
+        return f"id:({self.en_id}, navn:{self.navn}, prioritet:{self.prioritet})"
     
+    def __repr__(self):
+        return "{}(en_id = {}, navn = {}, prioritet = {} ".format(self.__class__.__name__, self.navn, self.en_id, self.prioritet)
+    
+    def __eq__(self, other):
+        if other.__class__ is self.__class__: 
+            return (self.en_id, self.navn, self.prioritet) == (other.id, other.navn, other.prioritet)
+        else: 
+            return NotImplemented
+   
+        
 #d
-    def leser_fra_brukern():
+def ny_katagori():
         en_id=input("id: ")
         navn= input("Skriv in navn: ")
         prioritet= input("Skriv inn prioritet: ")
         return Kategori(en_id,navn,prioritet)
-#g   
+    
+#e         
+def lagre_og_lese_katfil(katfil):
+    with open ("kataglist.txt", "w", encoding="UTF-8") as fil: 
+        for i in katfil: 
+            fil.writelines(f"{i.en_id};{i.navn};{i.prioritet}") 
+
+def lese_kata(katfil):
+    with open (katfil, "r", encoding="UFT-8") as fil:
+        kategori_liste = []
+        for j in fil: 
+            linje = j.split(";")
+            en_id = linje[0]
+            navn = linje [1]
+            prioritet = linje[2]
+            katagori = Kategori(en_id, navn, prioritet)
+            kategori_liste.append(katagori)
+            return katagori  
+#g
 class Sted:
     def __init__(self,ID_sted,navn_sted,gateadress,postnummer,poststed): 
         self.ID_sted=ID_sted
@@ -256,11 +287,11 @@ def meny():
         elif valg == 6:
             redigere(les_avtale_fil)
 
-       elif valg == 7:
-         nykategori()
+        elif valg == 7:
+             ny_katagori()
 
         elif valg == 8:
-        nytt_sted ()
+              nytt_sted ()
 
         elif valg == 9:
              print("avslutt")
